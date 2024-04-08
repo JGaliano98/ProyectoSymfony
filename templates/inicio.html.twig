@@ -1,0 +1,6 @@
+<h1>Hola {{ hola | upper }}</h1>
+<h3> Hay {{ personas | length }} personas</h3>
+{# Esto es un comentario en twig #}
+{% for persona in personas %}
+        <a href="{{ path('saluda', {nombre:persona.nombre} )}}">{{persona.nombre}}</a>
+{% endfor %}

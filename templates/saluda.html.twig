@@ -1,0 +1,5 @@
+<h1>Hola {{ nombre | upper }}</h1>
+{# Esto es un comentario en twig #}
+<img src="{{ asset('/imagenes/' ~ personas.foto ~ '.jpeg') }}"/>
+<br>
+<a href="{{ path('hola', {hola:"hola"} )}}">volver</a>
