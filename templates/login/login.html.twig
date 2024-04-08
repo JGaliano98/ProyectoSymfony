@@ -1,0 +1,86 @@
+{# templates/login/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+    body { 
+        font-family: 'Helvetica Neue', Arial, sans-serif; 
+        background-color: #eceff1; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh; 
+        margin: 0;
+    }
+    form { 
+        background-color: white; 
+        padding: 40px 60px; 
+        border-radius: 10px; 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        width: 100%; 
+        max-width: 400px;
+    }
+    h2 {
+        text-align: center; 
+        color: #333; 
+        margin-bottom: 30px; 
+        font-size: 24px;
+    }
+    label { 
+        display: block; 
+        margin-bottom: 5px; 
+        color: #333; 
+        font-weight: 500;
+    }
+    input[type=text], 
+    input[type=password] { 
+        width: 100%; 
+        padding: 15px; 
+        margin-top: 5px; 
+        margin-bottom: 20px;
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        box-sizing: border-box; 
+        font-size: 16px;
+    }
+    button { 
+        display: block; 
+        width: 100%; 
+        padding: 15px; 
+        background-color: #007bff; 
+        color: white; 
+        border: none; 
+        border-radius: 5px; 
+        cursor: pointer; 
+        font-size: 18px;
+        font-weight: 500;
+    }
+    button:hover { 
+        background-color: #0056b3; 
+    }
+    .error { 
+        color: #d32f2f; 
+        margin-top: -15px; 
+        margin-bottom: 20px; 
+        text-align: center; 
+        font-weight: 500;
+    }
+</style>
+
+{% if error %}
+    <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<form action="{{ path('app_login') }}" method="post">
+    <h2>Login</h2>
+    <label for="username">Email:</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" required autofocus>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password" required>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    <button type="submit">Login</button>
+</form>
+{% endblock %}
