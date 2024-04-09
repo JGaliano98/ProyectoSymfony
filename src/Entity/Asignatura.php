@@ -21,6 +21,9 @@ class Asignatura
     #[ORM\ManyToMany(targetEntity: Alumno::class, mappedBy: 'asignatura')]
     private Collection $alumnos;
 
+    #[ORM\ManyToOne(inversedBy: 'asignaturas')]
+    private ?Nota $nota = null;
+
     public function __construct()
     {
         $this->alumnos = new ArrayCollection();
@@ -66,6 +69,18 @@ class Asignatura
         if ($this->alumnos->removeElement($alumno)) {
             $alumno->removeAsignatura($this);
         }
+
+        return $this;
+    }
+
+    public function getNota(): ?Nota
+    {
+        return $this->nota;
+    }
+
+    public function setNota(?Nota $nota): static
+    {
+        $this->nota = $nota;
 
         return $this;
     }

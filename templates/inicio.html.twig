@@ -4,3 +4,9 @@
 {% for persona in personas %}
         <a href="{{ path('saluda', {nombre:persona.nombre} )}}">{{persona.nombre}}</a>
 {% endfor %}
+
+<form action="{{ path('app_logout') }}" method="post">
+
+        <button type="submit">logout</button>
+
+</form>

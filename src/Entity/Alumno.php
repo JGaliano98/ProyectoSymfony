@@ -34,9 +34,13 @@ class Alumno
     #[ORM\ManyToMany(targetEntity: Asignatura::class, inversedBy: 'alumnos')]
     private Collection $asignatura;
 
+    #[ORM\OneToMany(targetEntity: Nota::class, mappedBy: 'alumno')]
+    private Collection $notas;
+
     public function __construct()
     {
         $this->asignatura = new ArrayCollection();
+        $this->notas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,6 +128,36 @@ class Alumno
     public function removeAsignatura(Asignatura $asignatura): static
     {
         $this->asignatura->removeElement($asignatura);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Nota>
+     */
+    public function getNotas(): Collection
+    {
+        return $this->notas;
+    }
+
+    public function addNota(Nota $nota): static
+    {
+        if (!$this->notas->contains($nota)) {
+            $this->notas->add($nota);
+            $nota->setAlumno($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNota(Nota $nota): static
+    {
+        if ($this->notas->removeElement($nota)) {
+            // set the owning side to null (unless already changed)
+            if ($nota->getAlumno() === $this) {
+                $nota->setAlumno(null);
+            }
+        }
 
         return $this;
     }
