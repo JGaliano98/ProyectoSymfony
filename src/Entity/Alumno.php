@@ -101,11 +101,16 @@ class Alumno
         return $this->tutor;
     }
 
-    public function setTutor(?Tutor $tutor): static
+    
+
+    public function setTutor(?Tutor $tutor): self
     {
         $this->tutor = $tutor;
-
         return $this;
+    }
+
+    public function getTutorId(): ?int {
+        return $this->tutor ? $this->tutor->getId() : null;
     }
 
     /**

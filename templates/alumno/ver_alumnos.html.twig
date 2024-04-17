@@ -1,4 +1,57 @@
-{% for alumno in alumnos %}
-        {{ alumno.id}}
-        {{ alumno.nombre}}
-{% endfor %}
+{# templates/alumnos/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+<link href="{{asset('css/styles.css') }}" rel="stylesheet"/>
+
+
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alumno in alumnos %}
+            <tr>
+                <td>{{ alumno.id }}</td>
+                <td>{{ alumno.nombre }} {{ alumno.apellido }}</td>
+                <td>
+                    <a href="{{ path('alumno_editar', {'id': alumno.id}) }}" class="btn btn-primary">Editar</a>
+                    <a href="{{ path('alumno_borrar', {'id': alumno.id}) }}" class="btn btn-danger" onclick="return confirm('¿Está seguro de querer eliminar este alumno?');">Borrar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('alumno_crear') }}" class="btn btn-primary">Nuevo Alumno</a> <br><br>
+    
+    <div>
+        
+        {# Botón Anterior #}
+        {% if current_page > 1 %}
+            <a href="{{ path('paginar', {'page': current_page - 1, 'pagesize': pagesize}) }}" class="btn btn-primary">Anterior</a>
+        {% else %}
+            <button class="btn btn-primary btn-disabled">Anterior</button>
+        {% endif %}
+
+        <span>Página {{ current_page }} de {{ total_pages }}</span>
+        
+        {# Botón Siguiente #}
+        {% if current_page < total_pages %}
+            <a href="{{ path('paginar', {'page': current_page + 1, 'pagesize': pagesize}) }}" class="btn btn-primary">Siguiente</a>
+        {% else %}
+            <button class="btn btn-primary btn-disabled">Siguiente</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

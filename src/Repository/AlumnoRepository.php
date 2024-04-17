@@ -21,6 +21,79 @@ class AlumnoRepository extends ServiceEntityRepository
         parent::__construct($registry, Alumno::class);
     }
 
+    public function buscarApellidosPorA( string $letra): array
+    {
+     
+        $qb = $this->createQueryBuilder('a')
+         ->where('a.apellido LIKE :letra')
+         ->setParameter('letra', $letra.'%');
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+
+    }
+
+    public function paginaCinco(): array
+    {
+
+        $qb = $this->createQueryBuilder('a');
+        $qb->setMaxResults(5); 
+
+        
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
+
+    public function cuantosHay(): int
+    {
+
+        $qb = $this->createQueryBuilder('a');
+        $qb->select('count(a.id)');
+
+        
+        $query = $qb->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
+
+    
+    public function paginacion (int $pagina, int $tamaño): array
+    {
+
+        $qb = $this->createQueryBuilder('a');
+
+        $qb -> setFirstResult(($pagina -1) * $tamaño)
+        ->setMaxResults($tamaño);
+
+    
+        return $qb -> getQuery()->getResult();
+    }
+
+    public function verAsignaturasAlumno(int $id): array
+{
+    $qb = $this->createQueryBuilder('a');
+    $qb->select('asig.id, asig.nombre')
+        ->innerJoin('a.asignatura', 'asig')
+        ->where('a.id = :id')
+        ->setParameter('id', $id);
+
+    return $qb->getQuery()->getResult();
+}
+
+
+
+public function contarAsignaturasPorAlumno()
+{
+    $qb = $this->createQueryBuilder('a');
+    $qb->select('a.nombre, COUNT(asignatura.id) AS num_asignaturas')
+       ->leftJoin('a.asignatura', 'asignatura')
+       ->groupBy('a.id, a.nombre');
+
+    return $qb->getQuery()->getResult();
+}
+
     //    /**
     //     * @return Alumno[] Returns an array of Alumno objects
     //     */

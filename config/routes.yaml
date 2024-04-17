@@ -3,3 +3,8 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+alumno_editar:
+    path: /editar/{id}
+    controller: App\Controller\AlumnoController::editarAlumno
+

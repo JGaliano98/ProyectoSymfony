@@ -1,0 +1,7 @@
+{# templates/alumno/conteo_asignaturas.html.twig #}
+<h1>Conteo de Asignaturas por Alumno</h1>
+<ul>
+    {% for alumno in conteoAsignaturas %}
+        <li>{{ alumno.nombre }}: {{ alumno.num_asignaturas }} asignaturas</li>
+    {% endfor %}
+</ul>

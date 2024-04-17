@@ -1,0 +1,12 @@
+{# plantilla /alumno/ver_alumnos.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Listado de Alumnos</h1>
+    {% if totalAlumnos == 1 %}
+        <p>Hay 1 alumno en total.</p>
+    {% else %}
+        <p>Hay {{ totalAlumnos }} alumnos en total.</p>
+    {% endif %}
+{% endblock %}

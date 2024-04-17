@@ -1,7 +1,82 @@
 {# templates/login/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{# ... #}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Reset del body y estilos de fondo */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e9ecef;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Estilos del formulario */
+        form {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        /* Estilos para los input y label */
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #495057;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            box-sizing: border-box; /* Asegura que padding no afecte el ancho */
+        }
+
+        /* Estilos para el botón de submit */
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Ajustes adicionales para centrar todo verticalmente */
+        html, body {
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+    </style>
+{% endblock %}
+
+
+
+
 
 {% block body %}
     {% if error %}
@@ -20,6 +95,6 @@
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button type="submit">login</button>
+        <button type="submit">Acceder</button>
     </form>
 {% endblock %}

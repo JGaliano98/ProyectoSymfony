@@ -1,4 +1,4 @@
-{# templates/alumno/nuevo_alumno.html.twig #}
+{# templates/alumno/editar_alumno.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
@@ -29,7 +29,7 @@
             margin-bottom: 8px;
         }
         input[type='text'], input[type='password'], select, textarea {
-            width: calc(100% - 16px); /* Ajusta el ancho para que no toque los bordes */
+            width: calc(100% - 16px); /* Calcula el ancho menos el padding para mantener el diseño dentro del contenedor */
             padding: 8px;
             margin-bottom: 16px;
             border: 1px solid #ccc;
@@ -52,7 +52,7 @@
 
 {% block body %}
 <div class="container">
-    <h1>Nuevo Alumno</h1>
+    <h1>Editar Alumno</h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
